@@ -1,12 +1,13 @@
 import requests
 import json
 
-def fetch(name, url, filename, limit = None):
+def fetch(name, url, filename):
     items = []
     page = 1
+    size = 500
 
     while True:
-        response = requests.get('{0}?pagenumber={1}&pagesize=500'.format(url, page))
+        response = requests.get('{0}?pagenumber={1}&pagesize={2}'.format(url, page, size))
 
         if response.status_code != 200:
             print('Failed to fetch {0}'.format(name))
@@ -16,7 +17,7 @@ def fetch(name, url, filename, limit = None):
 
         items.extend(data['Items'])
 
-        if data['CurrentPage'] == data['TotalPages'] or (limit is not None and data['CurrentPage'] > limit):
+        if data['CurrentPage'] == data['TotalPages']:
             break
 
         page = page + 1
@@ -29,4 +30,4 @@ def fetch(name, url, filename, limit = None):
 fetch('Accommodations', 'https://tourism.opendatahub.bz.it/api/Accommodation', 'accommodations.json')
 fetch('Activities', 'https://tourism.opendatahub.bz.it/api/Activity', 'activities.json')
 fetch('Articles', 'https://tourism.opendatahub.bz.it/api/Article', 'articles.json')
-fetch('Events', 'https://tourism.opendatahub.bz.it/api/Event', 'events.json', 20)
+fetch('Events', 'https://tourism.opendatahub.bz.it/api/Event', 'events.json')
