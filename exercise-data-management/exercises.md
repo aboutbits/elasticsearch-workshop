@@ -121,7 +121,7 @@ Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discov
 Lets use the single field update API to add the delete field again.
 
 ```
-POST /events-v1/_doc/<COPY DOCUMENT ID>
+POST /events-v1/_update/<COPY DOCUMENT ID>
 {
     "doc" : {
         "Type": "1"
@@ -130,3 +130,187 @@ POST /events-v1/_doc/<COPY DOCUMENT ID>
 ```
 
 Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
+
+## Exercise 6 - Try to insert a document with a wrong datatype
+
+Try to insert the following document.
+
+```
+POST /events-v1/_doc/
+  {
+    "Id": "FD7DC58E68A9447FB987460138FB3C83", 
+    "Type": "1", 
+    "Active": "Active", 
+    "Title": "100. Giro d'Italia: Start der 17. Etappe Bruneck - Sterzing"
+  }
+```
+
+We will get a mapping error containing the following message.
+
+```json
+"type": "mapper_parsing_exception",
+"reason": "failed to parse field [Active] of type [boolean] in document with id 'IKw9PG4BOXgyEKN59-kD'. Preview of field's value: 'Active'"
+```
+
+We tried to index a document with a string value for the Active field, but it should be a boolean value. Why is it like that? We never specified any mapping for this index. Elasticsearch dynamically creates a mapping for every new field in an index.
+
+Use the following request to check the mapping for our `events-v1` index.
+
+```
+GET /events-v1/_mapping
+```
+
+You should see that the data type for `Active` is boolean. All other fields are of the same type:
+
+```
+"type" : "text",
+"fields" : {
+    "keyword" : {
+      "type" : "keyword",
+      "ignore_above" : 256
+    }
+  }
+```
+
+This mapping means that Elasticsearch is internally creating two fields for a single value, that we can use to search on. e.g. `Title` and `Title.keyword`
+
+```
+GET /events-v1/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "Title": "Bozen"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+We can do a full text query on the `Title` field, because it is indexed as text.
+
+And we can do an exact term query or aggregations on the `Title.keyword` field.
+
+```
+GET /events-v1/_search
+{
+  "query": {
+    "term": {
+      "Title.keyword": {
+        "value": "100. Giro d'Italia: Start der 16. Etappe Bozen - Bruneck"
+      }
+    }
+  }
+}
+```
+
+Further details about filtering and full text searches will be covered later.
+
+## Exercise 7 - Create a new index with predefined mapping
+
+In this exercise will create the index before we start indexing to have more optimal mapping. For example on the `Id` field we do not need full text search capabilities. Whereas on the `Title` field we don't need term filters.
+
+Lets create a new more optimal index `events-v2`.
+
+```
+PUT /events-v2
+{
+  "mappings": {
+    "properties": {
+      "Id": {
+        "type": "keyword"
+      },
+      "Title": {
+        "type": "text"
+      }
+    }
+  }
+}
+```
+
+Check the mapping:
+
+```
+GET /events-v2/_mapping
+```
+
+Now lets add again a document:
+
+```
+POST /events-v2/_doc/
+  {
+    "Id": "FD7DC58E68A9447FB987460138FB3C85", 
+    "Type": "1", 
+    "Active": true, 
+    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo" 
+  }
+```
+
+Check again the mapping:
+
+```
+GET /events-v2/_mapping
+```
+
+Now you should see that Elasticsearch added the mapping for `Active` and `Type` automatically. 
+
+## Exercise 8 - Index Templates
+
+You do not always want to define all fields upfront, but you would like to have a different default behavior. We can use index templates to define a default setting for certain data types.
+
+For our new index, we want that every string should just be specified as keyword. This keeps the memory footprint small and if we really need full text search, than we can define it explicitly.
+
+Lets create a new index again:
+
+```
+PUT /events-v3
+{
+  "mappings": {
+    "properties": {
+      "Title": {
+        "type": "text"
+      }
+    }, 
+    "dynamic_templates": [
+      {
+        "strings_as_keywords": {
+          "match": "*",
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+With this setup every field that gets added and is a string will be of type `keyword`, except `Title`.
+
+Lets try it out:
+
+```
+POST /events-v3/_doc/
+  {
+    "Id": "FD7DC58E68A9447FB987460138FB3C85", 
+    "Type": "1", 
+    "Active": true, 
+    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo" 
+  }
+```
+
+Check the mapping:
+
+```
+GET /events-v3/_mapping
+```
+
+Now we should have no double mappings per field anymore and the default is for strings is `keyword`.
+
+
+
