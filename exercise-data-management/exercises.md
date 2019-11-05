@@ -384,9 +384,62 @@ GET /events-v4/_mapping
 
 ## Exercise 11 - Create an alias
 
-## Exercise 12 - Indexation with refresh parameter
+With the exercise before we created a new index `events-v4`, but all our applications are still pointing to `events-v3`.
+We would now have to go to each application, change the code and redeploy. Quite painful and error prone, if you forget one. Aliases can help in such scenarios. We will create an alias called `events` and point it to the current index. We change our application code to point to `events` and in the future, if we ever have to create a new version of the events index, we can simply point the alias to that index and our applications continue to work as before.
+
+```
+POST /_aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "events-v4",
+        "alias": "events"
+      }
+    }
+  ]
+}
+```
+
+Try to query the newly created alias.
+
+```
+GET /events/_search
+```
+
+Try yourself to point the alias to `events-v1`. Be careful to not make it point to 2 indices at the same time.
+
+## Exercise 12 - Indexation with single document API
+
+In this exercise we are going to index the `articles.json` dataset.
+We will index each document at a time.
+
+Open your terminal and execute the `exercise-12.py` python script.
+
+```bash
+docker-compose run --rm python python exercise-data-management/exercise-12.py
+```
+
+Please take note on how long it took.
+
+Also open [Index management](http://localhost:5601/app/kibana#/management?_g=()) and check the size of the index.
 
 ## Exercise 13 - BULK index API
+
+In this exercise we want to improve the speed of indexation and reduce the memory footprint.
+For this reason we will make use of the BULK API.
+
+Open your terminal and execute the `exercise-13.py` python script.
+
+```bash
+docker-compose run --rm python python exercise-data-management/exercise-12.py
+```
+
+Please take note on how long it took and compare it to the results from exercise 12.
+
+Open again [Index management](http://localhost:5601/app/kibana#/management?_g=()) and check the size of the two indices.
+
+For this small dataset the difference is not that big, but with scale this has huge impact.
 
 ## Exercise 14 - Time series
 
