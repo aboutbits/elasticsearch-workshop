@@ -312,5 +312,14 @@ GET /events-v3/_mapping
 
 Now we should have no double mappings per field anymore and the default is for strings is `keyword`.
 
+## Exercise 10 - Change mapping of a field and reindex
 
+## Exercise 11 - Create an alias
 
+## Exercise 12 - Indexation with refresh parameter
+
+## Exercise 13 - BULK index API
+
+## Exercise 14 - Time series
+
+## Bonus: IML to clean time series (No solution)
