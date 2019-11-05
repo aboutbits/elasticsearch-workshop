@@ -89,7 +89,7 @@ Now you can navigate to the (Discover tab)[http://localhost:5601/app/kibana#/dis
 
 In this view you should see all 3 documents, that have been added in the previous steps.
 
-## Exercise 4 - Update a document
+## Exercise 5 - Update a document
 
 In order to do a full document replacement we need to know the `_id` of the document. For that purpose please copy the `_id` and the body of one of our documents into the following command:
 
@@ -116,7 +116,7 @@ PUT /events-v1/_doc/<COPY DOCUMENT ID>
 
 Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
 
-## Exercise 5 - Update a single field in a document
+## Exercise 6 - Update a single field in a document
 
 Lets use the single field update API to add the delete field again.
 
@@ -131,7 +131,7 @@ POST /events-v1/_update/<COPY DOCUMENT ID>
 
 Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
 
-## Exercise 6 - Try to insert a document with a wrong datatype
+## Exercise 7 - Try to insert a document with a wrong datatype
 
 Try to insert the following document.
 
@@ -210,7 +210,7 @@ GET /events-v1/_search
 
 Further details about filtering and full text searches will be covered later.
 
-## Exercise 7 - Create a new index with predefined mapping
+## Exercise 8 - Create a new index with predefined mapping
 
 In this exercise will create the index before we start indexing to have more optimal mapping. For example on the `Id` field we do not need full text search capabilities. Whereas on the `Title` field we don't need term filters.
 
@@ -258,7 +258,7 @@ GET /events-v2/_mapping
 
 Now you should see that Elasticsearch added the mapping for `Active` and `Type` automatically. 
 
-## Exercise 8 - Index Templates
+## Exercise 9 - Index Templates
 
 You do not always want to define all fields upfront, but you would like to have a different default behavior. We can use index templates to define a default setting for certain data types.
 
