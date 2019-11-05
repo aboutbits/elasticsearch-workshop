@@ -314,6 +314,74 @@ Now we should have no double mappings per field anymore and the default is for s
 
 ## Exercise 10 - Change mapping of a field and reindex
 
+Lets try to change the mapping of the `Type` field from `keyword` to `integer`.
+
+```
+PUT /events-v3/_mapping
+{
+  "properties": {
+    "Type": {
+      "type": "integer"
+    }
+  }
+}
+```
+
+If we try to do this Elasticsearch will complain as it doesn't allow us to change the type of a field from `keyword` to `integer`.
+
+We need to create a new index and reindex all data.
+
+```
+PUT /events-v4
+{
+  "mappings": {
+    "properties": {
+      "Title": {
+        "type": "text"
+      },
+      "Type": {
+        "type": "integer"
+      }
+    }, 
+    "dynamic_templates": [
+      {
+        "strings_as_keywords": {
+          "match": "*",
+          "match_mapping_type": "string",
+          "mapping": {
+            "type": "keyword"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Lets reindex all documents (in our case 1 document) from `events-v3` to `events-v4`.
+
+```
+POST _reindex
+{
+  "source": {
+    "index": "events-v3"
+  },
+  "dest": {
+    "index": "events-v4"
+  }
+}
+```
+
+Check that the documents have been reindex and check the mapping.
+
+```
+GET /events-v4/_search
+```
+
+```
+GET /events-v4/_mapping
+```
+
 ## Exercise 11 - Create an alias
 
 ## Exercise 12 - Indexation with refresh parameter
