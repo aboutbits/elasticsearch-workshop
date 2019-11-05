@@ -33,8 +33,7 @@ POST /events-v1/_doc/
     "Id": "FD7DC58E68A9447FB987460138FB3C85", 
     "Type": "1", 
     "Active": true, 
-    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo"
-    
+    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo" 
   }
 ```
 
@@ -90,4 +89,44 @@ Now you can navigate to the (Discover tab)[http://localhost:5601/app/kibana#/dis
 
 In this view you should see all 3 documents, that have been added in the previous steps.
 
+## Exercise 4 - Update a document
 
+In order to do a full document replacement we need to know the `_id` of the document. For that purpose please copy the `_id` and the body of one of our documents into the following command:
+
+```
+PUT /events-v1/_doc/<COPY DOCUMENT ID>
+  {
+    "Id": "FD7DC58E68A9447FB987460138FB3C85", 
+    "Type": "1", 
+    "Active": false,
+    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo" 
+  }
+```
+
+The document will be completely be replaced. If you skip fields, they will be removed. For example if we remove `type` from the body, it will delete the field from the document.
+
+```
+PUT /events-v1/_doc/<COPY DOCUMENT ID>
+  {
+    "Id": "FD7DC58E68A9447FB987460138FB3C85", 
+    "Active": false,
+    "Title": "100. Giro d'Italia: Start der 19. Etappe Innichen - Piancavallo" 
+  }
+```
+
+Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
+
+## Exercise 5 - Update a single field in a document
+
+Lets use the single field update API to add the delete field again.
+
+```
+POST /events-v1/_doc/<COPY DOCUMENT ID>
+{
+    "doc" : {
+        "Type": "1"
+    }
+}
+```
+
+Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
