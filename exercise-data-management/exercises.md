@@ -443,4 +443,49 @@ For this small dataset the difference is not that big, but with scale this has h
 
 ## Exercise 14 - Time series
 
-## Bonus: IML to clean time series (No solution)
+In this exercise we simulate log messages and create a script that indexes a document every 5 seconds, with a timestamp and some random text.
+
+We also create a new index every minute in the following form:
+
+logs-YYYY-MM-DD-hh-mm
+
+First we define the mapping of our indices. If we don't do this, Elasticsearch would map the timestamp, which is actually just a floating point number, to a float. Lets go ahead and execute the following request.
+
+```
+PUT /_template/template_logs
+{
+  "index_patterns": "logs-*",
+  "mappings": {
+    "properties": {
+      "timestamp": {
+        "type":   "date",
+        "format": "epoch_second"
+      }
+    }
+  }
+}
+```
+
+Now we can start indexing:
+
+```
+docker-compose run --rm python python exercise-data-management/exercise-14.py
+```
+
+Wait for 5 minutes to complete the execution of the script. Once its done lets head over to Kibana.
+Click on this [link](http://localhost:5601/app/kibana#/management/kibana/index_patterns) to open index patterns.
+
+Click on create index pattern button.
+
+Fill the index pattern input field with `logs-*`. The asterisks symbol will make sure that all indices that start with `logs-` will be included. Click next.
+
+On the next page we are asked to tell Kibana, what is the timestamp that defines our time series. Here we will select `timestamp.` Click **Create index pattern** and head over to the [discover tab](http://localhost:5601/app/kibana#/discover). We will see our events index first. Just select `logs-*` for the select in the left top corner.
+
+You should be able now to see the indexed documents ordered by timestamp.
+
+## Bonus: IML to clean time series
+
+Imagine we would never stop indexing logs and over time we add a new index every minute.
+
+Try to define your personal index lifecycle management to cleanup old indices. The [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/index-lifecycle-management-api.html#index-lifecycle-management-api) docs are a very good place to start.
+

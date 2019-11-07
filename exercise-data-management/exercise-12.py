@@ -2,7 +2,6 @@ import json
 from elasticsearch import Elasticsearch
 import time
 
-# by default we connect to localhost:9200
 es = Elasticsearch("http://elasticsearch:9200")
 
 # create an index in elasticsearch, ignore status code 400 (index already exists)
