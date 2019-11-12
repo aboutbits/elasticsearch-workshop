@@ -8,3 +8,8 @@ First, you have to fetch the dataset and import all the data into Elasticsearch.
 docker-compose run --rm python python dataset/fetch.py
 docker-compose run --rm python python exercise-search/import.py
 ```
+
+GET /_search
+GET /articles/_search
+GET /articles,activities/_search
+GET /a*/_search
