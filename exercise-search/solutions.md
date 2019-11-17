@@ -358,3 +358,34 @@ GET /accommodations/_search
   }
 }
 ```
+
+## Exercise 10 - Boosting
+
+```json
+GET /accommodations/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "AccoTypeId": {
+              "value": "HotelPension"
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "term": {
+            "AccoCategoryId": {
+              "value": "3stars",
+              "boost": 5
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```

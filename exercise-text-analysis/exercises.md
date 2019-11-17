@@ -52,6 +52,8 @@ Analyzers:
 
     > Today is a new day and I'm so :)
 
+3. How is the text analyzed and what benefits / use cases could this analyzer have?
+
 ## Exercise 4 - Custom Analyzer with NGrams
 
 1. Create an index with the name `text-analysis-4` and the following details:
@@ -69,6 +71,8 @@ Analyzers:
 2. Analyze the following text:
 
     > Apfelsaft ohne Zusatzstoffe
+
+3. How is the text analyzed and what benefits / use cases could this analyzer have?
 
 ## Exercise 5 - Language Analyzers
 

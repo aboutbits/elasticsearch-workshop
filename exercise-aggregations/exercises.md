@@ -6,7 +6,7 @@ First, you have to fetch the dataset and import all the data into Elasticsearch 
 
 ```bash
 docker-compose run --rm python python dataset/fetch.py
-docker-compose run --rm python python exercise-search/import.py
+docker-compose run --rm python python dataset/import.py
 ```
 
 ## Exercise 2 - Metric Aggregations

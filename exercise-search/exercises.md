@@ -6,7 +6,7 @@ First, you have to fetch the dataset and import all the data into Elasticsearch 
 
 ```bash
 docker-compose run --rm python python dataset/fetch.py
-docker-compose run --rm python python exercise-search/import.py
+docker-compose run --rm python python dataset/import.py
 ```
 
 ## Exercise 2 - Match All Query
@@ -61,7 +61,11 @@ Find all items in the index `articles` where the field `Type` is "presseartikel"
     - Filter accommodations with `AccoCategoryId` as "5stars"
     - And optionally rank accommodations higher if the have "Schwimmbad" or "Sauna" as a feature in `Features.Name`
 
-## Exercise 10 - Explain
+## Exercise 10 - Boosting
+
+Find all accommodations in the index `accommodations` that are of the type (field `AccoTypeId`) "HotelPension", but if they are also of the category (field `AccoCategoryId`) "3stars", then boost them by 5.
+
+## Exercise 11 - Explain
 
 Run the following query and analyze the explanation of Elasticsearch how they calculate the score.
 
