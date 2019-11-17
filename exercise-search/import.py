@@ -27,6 +27,9 @@ properties_accommodations = {
     'AccoCategoryId': {
         'type': 'keyword'
     },
+    'Beds': {
+        'type': 'integer'
+    },
     'Features': {
         'properties': {
             'Name': {
