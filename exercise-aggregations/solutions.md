@@ -35,11 +35,43 @@ GET /accommodations/_search
 
 ## Exercise 3 - Bucket Aggregations
 
+1. term aggregation
+
 ```json
 GET /accommodations/_search
 {
   "query": {
     "match_all": {}
+  },
+  "aggs": {
+    "categories": {
+      "terms": {
+        "field": "AccoCategoryId",
+        "size": 20
+      }
+    }
+  }
+}
+```
+
+2. size
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-size
+
+3. query
+
+```json
+GET /accommodations/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "Gröden",
+      "fields": [
+        "LocationInfo.RegionInfo.Name.*",
+        "LocationInfo.DistrictInfo.Name.*",
+        "LocationInfo.MunicipalityInfo.Name.*"
+      ]
+    }
   },
   "aggs": {
     "categories": {

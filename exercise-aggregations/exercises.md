@@ -13,12 +13,11 @@ docker-compose run --rm python python dataset/import.py
 
 Try to find out what the total, the average, the minimum and the maximum number of beds (field `Beds`) in the index `accommodations` is.
 
-
 ## Exercise 3 - Bucket Aggregations
 
-Try to group the accommodations in the index `accommodations` into groups of their category (field `AccoCategoryId`). How many accommodations exist in the different groups?
-
-Why are no all categories defined when you don't specify a size parameter? Why are all categories listed when you specify a size of 20?
+1. Try to group the accommodations in the index `accommodations` into groups of their category (field `AccoCategoryId`). How many accommodations exist in the different groups?
+2. Why are no all categories defined when you don't specify a size parameter? Why are all categories listed when you specify a size of 20?
+3. Adjust the query by quering all accommodations that are only from "Gröden" (fields `LocationInfo.RegionInfo.Name.*`, `LocationInfo.DistrictInfo.Name.*` and `LocationInfo.MunicipalityInfo.Name.*`). Did the buckets change?
 
 ## Exercise 4 - Bucket and Metric Aggregations
 

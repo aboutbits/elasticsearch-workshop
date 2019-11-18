@@ -56,7 +56,7 @@ Find all items in the index `articles` where the field `Type` is "presseartikel"
 1. Search all items in the index `articles` where the field `Type` is "basisartikel". In addition, also filter all items that have the languages "de" (`HasLanguage`).
 2. Enhance the first query by returning only items where the field `Active` is not "false".
 3. Search all items in the index `accommodations` with the following requirements:
-    - Search for the place "Gröden" in the fields `LocationInfo.RegionInfo.Name.*`, `LocationInfo.DistrictInfo.Name.*` and `LocationInfo.MunicipalityInfo.Name.*``
+    - Search for the place "Gröden" in the fields `LocationInfo.RegionInfo.Name.*`, `LocationInfo.DistrictInfo.Name.*` and `LocationInfo.MunicipalityInfo.Name.*`
     - Filter accommodations with `AccoTypeId` as "HotelPension"
     - Filter accommodations with `AccoCategoryId` as "5stars"
     - And optionally rank accommodations higher if the have "Schwimmbad" or "Sauna" as a feature in `Features.Name`
