@@ -310,7 +310,7 @@ Check the mapping:
 GET /events-v3/_mapping
 ```
 
-Now we should have no double mappings per field anymore and the default is for strings is `keyword`.
+Now we should have no double mappings per field anymore and the default for strings is `keyword`.
 
 ## Exercise 10 - Change mapping of a field and reindex
 
@@ -432,7 +432,7 @@ For this reason we will make use of the BULK API.
 Open your terminal and execute the `exercise-13.py` python script.
 
 ```bash
-docker-compose run --rm python python exercise-data-management/exercise-12.py
+docker-compose run --rm python python exercise-data-management/exercise-13.py
 ```
 
 Please take note on how long it took and compare it to the results from exercise 12.
