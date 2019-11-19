@@ -489,3 +489,5 @@ Imagine we would never stop indexing logs and over time we add a new index every
 
 Try to define your personal index lifecycle management to cleanup old indices. The [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/index-lifecycle-management-api.html#index-lifecycle-management-api) docs are a very good place to start.
 
+Solution can be found [here](https://github.com/aboutbits/elasticsearch-workshop/blob/master/exercise-data-management/solution-bonus.md).
+
