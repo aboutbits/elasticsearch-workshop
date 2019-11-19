@@ -85,7 +85,7 @@ Click on the blue button in the right top corner **Create index pattern**.
 
 You should see a form, that asks you to enter an index pattern. Please enter the index name in this field. In our case it is `events-v1`. Click on **Next step** and then on **Create index pattern**.
 
-Now you can navigate to the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()].
+Now you can navigate to the [Discover tab](http://localhost:5601/app/kibana#/discover?_g=()).
 
 In this view you should see all 3 documents, that have been added in the previous steps.
 
@@ -103,7 +103,7 @@ PUT /events-v1/_doc/<COPY DOCUMENT ID>
   }
 ```
 
-The document will be completely be replaced. If you skip fields, they will be removed. For example if we remove `type` from the body, it will delete the field from the document.
+The document will be replaced completely. If you skip fields, they will be removed. For example if we remove `type` from the body, it will delete the field from the document.
 
 ```
 PUT /events-v1/_doc/<COPY DOCUMENT ID>
@@ -114,7 +114,7 @@ PUT /events-v1/_doc/<COPY DOCUMENT ID>
   }
 ```
 
-Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
+Check the changes in the [Discover tab](http://localhost:5601/app/kibana#/discover?_g=()) or with search API.
 
 ## Exercise 6 - Update a single field in a document
 
@@ -129,7 +129,7 @@ POST /events-v1/_update/<COPY DOCUMENT ID>
 }
 ```
 
-Check the changes in the (Discover tab)[http://localhost:5601/app/kibana#/discover?_g=()] or with search API.
+Check the changes in the [Discover tab](http://localhost:5601/app/kibana#/discover?_g=()) or with search API.
 
 ## Exercise 7 - Try to insert a document with a wrong datatype
 
