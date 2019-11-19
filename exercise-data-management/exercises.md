@@ -212,7 +212,7 @@ Further details about filtering and full text searches will be covered later.
 
 ## Exercise 8 - Create a new index with predefined mapping
 
-In this exercise will create the index before we start indexing to have more optimal mapping. For example on the `Id` field we do not need full text search capabilities. Whereas on the `Title` field we don't need term filters.
+In this exercise we will create the index before we start indexing to have a more optimal mapping. For example on the `Id` field we do not need full text search capabilities. Whereas on the `Title` field we don't need term filters.
 
 Lets create a new more optimal index `events-v2`.
 
