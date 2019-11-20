@@ -2,6 +2,8 @@
 
 This repository contains the exercises for the Elasticsearch workshop.
 
+The slides can be found here: [https://docs.google.com/presentation/d/1DGdOvcICTI18kGdb23e9hnnV5BEmMDWBvdRXYvrrmPs/edit?usp=sharing](https://docs.google.com/presentation/d/1DGdOvcICTI18kGdb23e9hnnV5BEmMDWBvdRXYvrrmPs/edit?usp=sharing)
+
 ## Information
 
 About Bits is a company based in South Tyrol, Italy. You can find more information about us on [our website](https://aboutbits.it).
