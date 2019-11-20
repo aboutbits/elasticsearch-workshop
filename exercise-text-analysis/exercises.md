@@ -41,7 +41,7 @@ Analyzers:
         - Tokenizer: Whitespace tokenizer (whitespace)
         - Token filter: Stopwords token filter (stop)
             - Built-in english stopwords
-        - Token filter: Synonyms token filter (synonyms)
+        - Token filter: Synonyms token filter (synonym)
             - :) should be converted to happy
             - :( should be converted to sad
     - Mapping for the field `message`:
