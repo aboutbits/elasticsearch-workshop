@@ -62,7 +62,7 @@ PUT /text-analysis-2
   },
   "mappings": {
     "properties": {
-      "username": {
+      "message": {
         "type": "text",
         "analyzer": "message_analyzer"
       }
@@ -123,7 +123,7 @@ PUT /text-analysis-3
   },
   "mappings": {
     "properties": {
-      "username": {
+      "message": {
         "type": "text",
         "analyzer": "message_analyzer"
       }
@@ -168,7 +168,7 @@ PUT /text-analysis-4
   },
   "mappings": {
     "properties": {
-      "username": {
+      "message": {
         "type": "text",
         "analyzer": "message_analyzer"
       }
